@@ -3,9 +3,9 @@ Monitor a website for changes.
 
 ## How to run
 
-`git clone https://github.com/Fantop/webScraper-Seth.git` or download and extract the zip.
+`git clone https://github.com/clevelandhighschoolcs/p4mawpup-Fantop.git` or download and extract the zip.
 
-`cd webScraper-Seth`
+`cd p4mawpup-Fantop`
 
 `pip install BeautifulSoup4`
 
