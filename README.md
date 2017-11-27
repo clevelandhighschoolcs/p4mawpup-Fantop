@@ -21,4 +21,4 @@ Example:
 
 * Make sure you are running Python 2. Use `python --version` to check.
 * Make sure you are giving a unique word for every url you are checking. This is necessary because the program stores copies of the page's html and needs unique file names when it saves these.
-* I did not write the function that parses the visible text from the HTML. Rest of the code is completely original.
+* I did not write the function that parses the visible text from the HTML. Credit goes to [jbochi](https://stackoverflow.com/users/230636/jbochi). Rest of the code is completely original.
