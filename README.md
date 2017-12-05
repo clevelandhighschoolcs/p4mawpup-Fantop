@@ -17,6 +17,9 @@ Press control-c to exit the program at any time.
 Example:
 ![example](https://i.cubeupload.com/WeFVCp.png)
 
+Flowchart:
+![flowchart](https://raw.githubusercontent.com/clevelandhighschoolcs/p4mawpup-Fantop/master/flowchart.png)
+
 ## Notes
 
 * Make sure you are running Python 2.7.x. Use `python --version` to check.
