@@ -21,6 +21,9 @@ Flowchart:
 
 ![flowchart](https://raw.githubusercontent.com/clevelandhighschoolcs/p4mawpup-Fantop/master/flowchart.png)
 
+## Algorithm
+When the program is run, one of two different algorithms can be used to check if the webpage has been updated. The simple algorithm checks that the old html and new html are equal; looking for any difference in the two strings of html. The fancy algorithm parses any visible text from the old and new html, then it checks that these two strings of parsed text are equal.
+
 ## Notes
 
 * Make sure you are running Python 2.7.x. Use `python --version` to check.
