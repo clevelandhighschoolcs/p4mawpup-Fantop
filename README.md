@@ -7,7 +7,7 @@ Monitor a website for changes.
 
 `cd p4mawpup-Fantop`
 
-`pip install BeautifulSoup4`
+`pip install BeautifulSoup4` or alternatively `pip install -r requirements.txt`
 
 `python webScraper.py`
 
@@ -22,7 +22,7 @@ Flowchart:
 ![flowchart](https://raw.githubusercontent.com/clevelandhighschoolcs/p4mawpup-Fantop/master/flowchart.png)
 
 ## Algorithm
-When the program is run, one of two different algorithms can be used to check if the webpage has been updated. The simple algorithm checks that the old html and new html are equal; looking for any difference in the two strings of html. The fancy algorithm parses any visible text from the old and new html, then it checks that these two strings of parsed text are equal.
+When the program is run, one of two different algorithms can be used to check if the webpage has been updated. The simple algorithm checks that the old html and new html are equal; looking for any difference in the two strings of html. If the strings are not equal, the page has been updated. The fancy algorithm parses any visible text from the old and new html, then it checks that these two strings of parsed text are equal. Again, if the strings are not equal, the page has been updated.
 
 ## Notes
 
