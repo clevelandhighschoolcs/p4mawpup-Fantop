@@ -7,7 +7,9 @@ Monitor a website for changes.
 
 `cd p4mawpup-Fantop`
 
-`pip install BeautifulSoup4` or alternatively `pip install -r requirements.txt`
+`pip install BeautifulSoup4` and `pip install twilio`
+
+Or alternatively `pip install -r requirements.txt`
 
 `python webScraper.py`
 
