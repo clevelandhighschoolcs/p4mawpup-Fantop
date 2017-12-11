@@ -3,6 +3,9 @@ import time
 import urllib2
 import shutil
 import sys
+import re
+import twilio
+from twilio.rest import Client
 
 try:
 	from bs4 import BeautifulSoup
@@ -11,7 +14,13 @@ except Exception as e:
 	print "Are you sure you have BeautifulSoup installed? Enter 'pip install BeautifulSoup4' in the terminal to install."
 	sys.exit()
 
-def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="example", compareText=False):
+def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="example", compareText=False, useTwilio=False, phoneNumber="0"):
+
+    account_sid = 'AC0bafa63942dbc2805fd2a5339342192a'
+    auth_token = '324662f05f9d59c0a3479dd58b07356a'
+    twilio_phone_number = '+15036104140'
+    my_phone_number = "+" + re.sub("\D", "", phoneNumber) # remove non-digits from phone number
+
     # it's good practice to have headers
     hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -60,6 +69,16 @@ def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="exa
                 saved_webpage.close()
 
                 # quit the program
+
+                if (useTwilio): # text user
+                    body = "The webpage at: " + url + " has updated!"
+                    client = Client(account_sid, auth_token)
+                    client.messages.create(
+                        body=body,
+                        to=my_phone_number,
+                        from_=twilio_phone_number
+                    )
+
                 break
             else:
                 print("No changes detected at " + time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()) + ".")
@@ -102,6 +121,15 @@ if (compareTextString.lower() == "yes" or compareTextString.lower() == "y"):
 else:
 	compareTextBoolean = False
 
+useTwilioString = str(raw_input("\nDo you want to get a text when the webpage updates (yes/no)? "))
+
+if (useTwilioString.lower() == "yes" or useTwilioString.lower() == "y"):
+    useTwilioBoolean = True
+    phoneNumberInput = str(raw_input("\nWhat phone number do you want texts to be sent to?\n(make sure to include the country code at the beginning) "))
+else:
+    useTwilioBoolean = False
+    phoneNumberInput = "0";
+
 print("")
 
-checkIfUpdated(urlInput, updateInput, filePrefixInput, compareTextBoolean)
+checkIfUpdated(urlInput, updateInput, filePrefixInput, compareTextBoolean, useTwilioBoolean, phoneNumberInput)
