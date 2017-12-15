@@ -14,11 +14,9 @@ except Exception as e:
 	print "Are you sure you have BeautifulSoup installed? Enter 'pip install BeautifulSoup4' in the terminal to install."
 	sys.exit()
 
-def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="example", compareText=False, useTwilio=False, phoneNumber="0"):
+def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="example", compareText=False, useTwilio=False, phoneNumber="",account_sid="",auth_token="",twilio_phone_number=""):
 
-    account_sid = 'AC0bafa63942dbc2805fd2a5339342192a'
-    auth_token = '324662f05f9d59c0a3479dd58b07356a'
-    twilio_phone_number = '+15036104140'
+    twilio_phone_number = "+" + re.sub("\D", "", twilio_phone_number) # remove non-digits from phone number
     my_phone_number = "+" + re.sub("\D", "", phoneNumber) # remove non-digits from phone number
 
     # it's good practice to have headers
@@ -43,7 +41,7 @@ def checkIfUpdated(url="http://example.com/", secondsInterval=5, filePrefix="exa
     while True:
         # load the webpage
         webpage = urllib2.urlopen(req)
-        webpage_html = webpage.read();
+        webpage_html = webpage.read()
 
         if (webpage.getcode() == 200): # make sure website returns an OK status code
             saved_webpage = open(filePrefix + "_saved.html", "r+")
@@ -107,29 +105,39 @@ def text_from_html(body):
     return u" ".join(t.strip() for t in visible_texts)
 
 urlInput = str(raw_input("What url do you want to monitor for updates? "))
-updateInput = int(raw_input("\nHow many seconds do you want to wait between checks (5 seconds minimum)? "))
+updateInput = int(raw_input("How many seconds do you want to wait between checks (5 seconds minimum)? "))
 
 if (updateInput < 5):
 	print("Wait time too low. Page will be checked every 5 seconds.")
 	updateInput = 5
 
-filePrefixInput = str(raw_input("\nEnter an alphanumeric word (letters and numbers only). You should use a different word for every new website you want to check: "))
-compareTextString = str(raw_input("\nDo you want to use the fancy method to check for updates to the page? (yes/no)\n(I recommend NOT using this method until you've tried the normal method first) "))
+filePrefixInput = str(raw_input("Enter an alphanumeric word (letters and numbers only). You should use a different word for every new website you want to check: "))
+compareTextString = str(raw_input("Do you want to use the fancy method to check for updates to the page? (yes/no)\n(I recommend NOT using this method until you've tried the normal method first) "))
 
 if (compareTextString.lower() == "yes" or compareTextString.lower() == "y"):
 	compareTextBoolean = True
 else:
 	compareTextBoolean = False
 
-useTwilioString = str(raw_input("\nDo you want to get a text when the webpage updates (yes/no)? "))
+useTwilioString = str(raw_input("Do you want to get a text when the webpage updates (yes/no)? "))
 
 if (useTwilioString.lower() == "yes" or useTwilioString.lower() == "y"):
     useTwilioBoolean = True
-    phoneNumberInput = str(raw_input("\nWhat phone number do you want texts to be sent to?\n(make sure to include the country code at the beginning) "))
+
+    account_sid = str(raw_input("Twilio account SID: "))
+    auth_token = str(raw_input("Twilio account authorization token: "))
+    twilio_phone_number = str(raw_input("Twilio phone number to send texts from:\n(make sure to include the country code at the beginning) "))
+    phoneNumberInput = str(raw_input("What phone number do you want texts to be sent to?\n(make sure to include the country code at the beginning) "))
+
 else:
     useTwilioBoolean = False
-    phoneNumberInput = "0";
+
+    account_sid = ""
+    auth_token = ""
+    twilio_phone_number = ""
+    phoneNumberInput = ""
+    phoneNumberInput = ""
 
 print("")
 
-checkIfUpdated(urlInput, updateInput, filePrefixInput, compareTextBoolean, useTwilioBoolean, phoneNumberInput)
+checkIfUpdated(urlInput, updateInput, filePrefixInput, compareTextBoolean, useTwilioBoolean, phoneNumberInput, account_sid, auth_token, twilio_phone_number)
