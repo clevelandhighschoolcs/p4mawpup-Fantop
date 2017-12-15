@@ -17,6 +17,7 @@ Press control-c to exit the program at any time.
 
 
 Example:
+
 ![example](https://image.ibb.co/dR1BkR/example.png)
 
 Flowchart:
